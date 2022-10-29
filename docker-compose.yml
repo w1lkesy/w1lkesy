@@ -1,27 +1,25 @@
 version: "3"
-
-
 services:
-  #php:
-    #container_name: php
-    #image: "php:latest"
-    #restart: always
-  #web_server:
-   #container_name: webserver
-   #image: nginx:latest
-   #ports:
-      #- "90:80"
+  php:
+    container_name: php
+    image: "php:latest"
+    restart: unless-stopped
+  web_server:
+   container_name: webserver
+   image: nginx:latest
+   ports:
+      - "90:80"
    #restart: always
   database:
     container_name: "mariadb"
     image: "mariadb:10.9.3-jammy"
-    restart: always
+    restart: unless-stopped
   #Python:
   #  container_name: Python
   #  image: "python:bullseye"
   #  restart: unless-stopped
   pihole:
-    container_name: pihole
+    container_name: "pihole"
     image: "pihole/pihole:latest"
     # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
     ports:
@@ -31,8 +29,7 @@ services:
       - "85:80/tcp"
     environment:
       TZ: 'Europe/London'
-      WEBPASSWORD: 'Anf13ld0'
-      PIHOLE_DNS_: "8.8.8.8"
+      PIHOLE_DNS_: "127.0.0.0#5335"
       WEBTHEME: "default-darker"
     # Volumes store your data between container upgrades
     volumes:
