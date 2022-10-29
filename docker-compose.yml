@@ -1,0 +1,42 @@
+version: "3"
+
+
+services:
+  #php:
+    #container_name: php
+    #image: "php:latest"
+    #restart: always
+  #web_server:
+   #container_name: webserver
+   #image: nginx:latest
+   #ports:
+      #- "90:80"
+   #restart: always
+  database:
+    container_name: "mariadb"
+    image: "mariadb:10.9.3-jammy"
+    restart: always
+  #Python:
+  #  container_name: Python
+  #  image: "python:bullseye"
+  #  restart: unless-stopped
+  pihole:
+    container_name: pihole
+    image: "pihole/pihole:latest"
+    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    ports:
+    # - "53:53/tcp"
+    # - "53:53/udp"
+     #- "67:67/udp" # Only required if you are using Pi-hole as your DHCP server
+      - "85:80/tcp"
+    environment:
+      TZ: 'Europe/London'
+      WEBPASSWORD: 'Anf13ld0'
+      PIHOLE_DNS_: "8.8.8.8"
+      WEBTHEME: "default-darker"
+    # Volumes store your data between container upgrades
+    volumes:
+      - './etc-pihole:/etc/pihole'
+      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
+    restart: unless-stopped
