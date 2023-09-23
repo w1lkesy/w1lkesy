@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @w1lkesy
 - 👀 I’m interested in making product which enriches peoples lives. 
-- 🌱 I’m currently learning php
+- 🌱 I’m currently learning SQL, html, and other technologies
 - 💞️ I’m looking to collaborate on multiple web applications
 - 📫 How to reach me ...
 
